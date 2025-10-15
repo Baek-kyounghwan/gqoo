@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>지쿠터 길찾기</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="search-bar">
+        <span class="icon icon-search" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M13.833 12.25h-.708l-.25-.242a5.28 5.28 0 001.275-3.458A5.316 5.316 0 008.834 3.25a5.316 5.316 0 00-5.316 5.316 5.316 5.316 0 005.316 5.317 5.28 5.28 0 003.458-1.275l.242.25v.708L15.917 17 17 15.917l-3.167-3.167zm-5 0a3.75 3.75 0 01-3.75-3.75 3.75 3.75 0 113.75 3.75z"
+              fill="currentColor"
+            />
+          </svg>
+        </span>
+        <label class="sr-only" for="destination-input">목적지</label>
+        <input
+          id="destination-input"
+          class="destination-input"
+          type="text"
+          placeholder="어디로 갈까요?"
+          autocomplete="off"
+        />
+      </header>
+
+      <section class="map-section" aria-labelledby="map-heading">
+        <h2 id="map-heading" class="section-title">경로 미리보기</h2>
+        <div class="map-canvas">
+          <div class="map-grid"></div>
+          <div class="map-radius map-radius--inner"></div>
+          <div class="map-radius map-radius--outer"></div>
+          <div class="map-marker" role="img" aria-label="현재 위치"></div>
+          <div class="map-legend">
+            <div class="legend-item">
+              <span class="legend-dot legend-dot--primary"></span>
+              <span>지쿠터 이동 가능</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot legend-dot--secondary"></span>
+              <span>대중교통 환승</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="options-section" aria-label="탐색 옵션">
+        <div class="options-row">
+          <div class="radius-control">
+            <button
+              type="button"
+              class="pill-button pill-button--primary"
+              id="radius-button"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+            >
+              <span class="icon icon-clock" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 1.667a8.333 8.333 0 100 16.666 8.333 8.333 0 000-16.666zm0 15a6.667 6.667 0 110-13.334 6.667 6.667 0 010 13.334zm.833-10H9.583V10l3.75 2.25.625-1.025-3.125-1.875V6.667z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <span id="radius-label">10분 반경</span>
+            </button>
+            <div class="radius-menu" role="listbox" aria-labelledby="radius-button">
+              <button type="button" role="option" data-radius="5">5분 반경</button>
+              <button type="button" role="option" data-radius="10" aria-selected="true">10분 반경</button>
+              <button type="button" role="option" data-radius="15">15분 반경</button>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="pill-button pill-button--primary pill-button--toggle is-active"
+            id="scooter-toggle"
+            aria-pressed="true"
+          >
+            <span>지쿠터 사용 가능</span>
+            <span class="icon icon-scooter" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7 18.5a2.5 2.5 0 11-.001-5.001A2.5 2.5 0 017 18.5zm10 0a2.5 2.5 0 11-.001-5.001A2.5 2.5 0 0117 18.5zM11 7h2l1.6 6.4a2.51 2.51 0 012.81 1.57L18 15.5h-2l-.2-.8H9.2L8 18H6l1.6-5.6a2 2 0 011.92-1.4H12l-.5-2H9V7h2z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <footer class="cta-footer">
+        <button type="button" class="cta-button">지쿠터 포함 길찾기 시작</button>
+      </footer>
+    </main>
+
+    <template id="suggestions-template">
+      <ul class="suggestions-list" role="listbox"></ul>
+    </template>
+    <script src="script.js" defer></script>
+  </body>
+</html>
