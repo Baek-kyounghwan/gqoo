@@ -1,0 +1,330 @@
+{
+  "application": {
+    "name": "지쿠터 길찾기",
+    "description": "지쿠터 길찾기 앱은 사용자가 원하는 목적지까지 효율적인 경로를 찾을 수 있도록 돕는 내비게이션 애플리케이션입니다. 주요 기능으로는 목적지 입력, 현재 위치를 기반으로 한 지도 표시, 탐색 반경 설정, 그리고 공유 킥보드(지쿠터)를 포함한 이동 수단 선택 옵션 제공이 있습니다. 지쿠터를 활용하여 빠르고 편리하게 이동하고자 하는 사용자나 특정 시간 내에 도달 가능한 주변 목적지를 탐색하려는 사용자들에게 유용합니다.\n사용자가 ‘5분 / 10분 / 15분’ 등의 이동 시간을 설정하면,\n해당 시간 내 도달 가능한 구역을 지도에 원형으로 표시하고 특히 지쿠터로 갈 수 있는 곳을 포함해 그 곳에서 출발했을 때 가장 빠른 길찾기를 제공합니다. 각 지점마다 현재 지점에서 지쿠터로 해당 대중교통 탑승 지점까지 이동시간 + 대중교통 이용시간을 비교해 가장 빠른 루트를 제공합니다."
+  },
+  "screen": {
+    "name": "Main Screen",
+    "description": "이 화면은 사용자가 목적지를 설정하고 경로 탐색 조건을 지정하는 역할을 합니다. 상단에는 목적지 입력 필드가 있어 사용자가 어디로 갈지 입력할 수 있습니다. 중앙의 지도 영역은 현재 사용자의 위치와 설정된 탐색 반경을 시각적으로 보여줍니다. 하단에는 탐색 반경(예: 10분 반경)을 조절하거나 지쿠터를 경로 탐색 조건에 포함할지 여부를 선택하는 옵션 버튼들이 있습니다. 모든 설정이 완료되면 '지쿠터 포함 길찾기 시작' 버튼을 눌러 경로 탐색을 시작하고 다음 화면으로 전환됩니다."
+  },
+  "components": [
+    {
+      "id": "Container-1760551458754-epuiecc",
+      "name": "MainLayout_Container",
+      "type": "Container",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "width": 522,
+        "height": 543
+      },
+      "description": "애플리케이션 전체 화면을 포함하는 메인 레이아웃 컨테이너입니다.",
+      "props": {},
+      "styles": {
+        "backgroundColor": "rgba(55, 65, 81, 0.5)",
+        "borderColor": "#4b5563",
+        "borderWidth": 1,
+        "borderRadius": 6,
+        "color": "#ffffff"
+      },
+      "isLocked": false
+    },
+    {
+      "id": "Container-1760551458754-k9qu055",
+      "name": "SearchBar_Container",
+      "type": "Container",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "width": 522,
+        "height": 80
+      },
+      "description": "상단에 위치한 목적지 검색 입력 필드와 검색 아이콘을 포함하는 컨테이너입니다.",
+      "props": {},
+      "styles": {
+        "backgroundColor": "rgba(55, 65, 81, 0.5)",
+        "borderColor": "#4b5563",
+        "borderWidth": 1,
+        "borderRadius": 6,
+        "color": "#ffffff"
+      },
+      "isLocked": false
+    },
+    {
+      "id": "Input-1760551458754-lbgep5i",
+      "name": "Destination_Input",
+      "type": "Input",
+      "position": {
+        "x": 20,
+        "y": 20
+      },
+      "size": {
+        "width": 482,
+        "height": 40
+      },
+      "description": "사용자가 목적지를 입력할 수 있는 텍스트 입력 필드입니다. 텍스트 입력 시 검색 제안 목록이 나타날 수 있습니다.",
+      "props": {
+        "placeholder": "어디로 갈까요?"
+      },
+      "styles": {
+        "backgroundColor": "#374151",
+        "borderColor": "#6b7280",
+        "borderWidth": 1,
+        "borderRadius": 6,
+        "color": "#ffffff",
+        "paddingLeft": 12
+      },
+      "isLocked": false
+    },
+    {
+      "id": "Icon-1760551458754-uajs1t2",
+      "name": "Search_Icon",
+      "type": "Icon",
+      "position": {
+        "x": 35,
+        "y": 30
+      },
+      "size": {
+        "width": 20,
+        "height": 20
+      },
+      "description": "검색 입력 필드 왼쪽에 위치한 돋보기 아이콘입니다. 검색 기능을 시각적으로 나타냅니다.",
+      "props": {
+        "icon": "HomeIcon"
+      },
+      "styles": {
+        "color": "#9ca3af"
+      },
+      "isLocked": false
+    },
+    {
+      "id": "Container-1760551458754-l746fov",
+      "name": "MapDisplay_Container",
+      "type": "Container",
+      "position": {
+        "x": 0,
+        "y": 80
+      },
+      "size": {
+        "width": 522,
+        "height": 350
+      },
+      "description": "지도를 표시하는 영역으로, 현재 위치 마커와 탐색 반경 원을 포함합니다. 사용자의 이동 경로를 시각적으로 보여줍니다.",
+      "props": {},
+      "styles": {
+        "backgroundColor": "rgba(55, 65, 81, 0.5)",
+        "borderColor": "#4b5563",
+        "borderWidth": 1,
+        "borderRadius": 6,
+        "color": "#ffffff"
+      },
+      "isLocked": false
+    },
+    {
+      "id": "Image-1760551458754-1jiae9n",
+      "name": "Map_Background",
+      "type": "Image",
+      "position": {
+        "x": 0,
+        "y": 80
+      },
+      "size": {
+        "width": 522,
+        "height": 350
+      },
+      "description": "지도의 시각적인 배경을 제공합니다. 실제 지도 데이터 로드 후에는 상세 지도로 대체됩니다.",
+      "props": {
+        "src": "https://picsum.photos/200/300"
+      },
+      "styles": {
+        "objectFit": "cover",
+        "borderRadius": 8
+      },
+      "isLocked": false
+    },
+    {
+      "id": "Icon-1760551458754-1g084wm",
+      "name": "CurrentLocation_Marker",
+      "type": "Icon",
+      "position": {
+        "x": 241,
+        "y": 230
+      },
+      "size": {
+        "width": 40,
+        "height": 40
+      },
+      "description": "사용자의 현재 위치를 나타내는 지도상의 마커입니다. 길찾기의 출발점 역할을 합니다.",
+      "props": {
+        "icon": "HomeIcon"
+      },
+      "styles": {
+        "color": "#9ca3af"
+      },
+      "isLocked": false
+    },
+    {
+      "id": "Misc-1760551458754-h6o9ffy",
+      "name": "SearchRadius_Circle",
+      "type": "Misc",
+      "position": {
+        "x": 131,
+        "y": 125
+      },
+      "size": {
+        "width": 260,
+        "height": 260
+      },
+      "description": "현재 위치를 중심으로 설정된 탐색 반경을 시각적으로 나타내는 원형 영역입니다. 이 반경 내에서 목적지 및 이동 수단이 탐색됩니다.",
+      "props": {},
+      "styles": {
+        "backgroundColor": "rgba(250, 204, 21, 0.2)",
+        "borderColor": "#facc15",
+        "borderWidth": 2,
+        "borderRadius": 6,
+        "borderStyle": "dashed",
+        "color": "#facc15",
+        "fontSize": 14,
+        "fontWeight": 500
+      },
+      "isLocked": false
+    },
+    {
+      "id": "Container-1760551458754-b4qhezd",
+      "name": "OptionsBar_Container",
+      "type": "Container",
+      "position": {
+        "x": 0,
+        "y": 430
+      },
+      "size": {
+        "width": 522,
+        "height": 60
+      },
+      "description": "추가적인 경로 탐색 옵션들을 포함하는 컨테이너입니다. 반경 설정 및 이동 수단 선택 버튼이 있습니다.",
+      "props": {},
+      "styles": {
+        "backgroundColor": "rgba(55, 65, 81, 0.5)",
+        "borderColor": "#4b5563",
+        "borderWidth": 1,
+        "borderRadius": 6,
+        "color": "#ffffff"
+      },
+      "isLocked": false
+    },
+    {
+      "id": "Button-1760551458754-estb3nk",
+      "name": "Radius_Selection_Button",
+      "type": "Button",
+      "position": {
+        "x": 20,
+        "y": 440
+      },
+      "size": {
+        "width": 180,
+        "height": 40
+      },
+      "description": "현재 탐색 반경을 표시하고, 클릭 시 지쿠터를 타고 갈 수 있는 시간 반경 설정을 조절할 수 있는 옵션(모달 또는 드롭다운)을 활성화하는 버튼입니다. 왼쪽에 시계 아이콘이 시각적으로 포함되어 있습니다.",
+      "props": {
+        "text": "10분 반경",
+        "kind": "text",
+        "icon": null
+      },
+      "styles": {
+        "backgroundColor": "#2563eb",
+        "borderColor": "#6b7280",
+        "borderWidth": 0,
+        "borderRadius": 6,
+        "color": "#ffffff",
+        "fontSize": 14,
+        "fontWeight": 600
+      },
+      "isLocked": false
+    },
+    {
+      "id": "Button-1760551458754-37ui6bl",
+      "name": "Scooter_Option_Button",
+      "type": "Button",
+      "position": {
+        "x": 210,
+        "y": 440
+      },
+      "size": {
+        "width": 292,
+        "height": 40
+      },
+      "description": "공유 킥보드(지쿠터) 사용 가능 여부를 경로 탐색 조건에 포함할지 선택하는 토글형 버튼입니다. 클릭 시 상태가 변경되어 경로 탐색에 반영됩니다. 오른쪽에 킥보드 아이콘이 시각적으로 포함되어 있습니다.",
+      "props": {
+        "text": "지쿠터 사용 가능",
+        "kind": "text",
+        "icon": null
+      },
+      "styles": {
+        "backgroundColor": "#2563eb",
+        "borderColor": "#6b7280",
+        "borderWidth": 0,
+        "borderRadius": 6,
+        "color": "#ffffff",
+        "fontSize": 14,
+        "fontWeight": 600
+      },
+      "isLocked": false
+    },
+    {
+      "id": "Container-1760551458754-qe9ls9w",
+      "name": "ActionButton_Container",
+      "type": "Container",
+      "position": {
+        "x": 0,
+        "y": 490
+      },
+      "size": {
+        "width": 522,
+        "height": 53
+      },
+      "description": "경로 탐색 시작 버튼을 포함하는 하단 액션 컨테이너입니다.",
+      "props": {},
+      "styles": {
+        "backgroundColor": "rgba(55, 65, 81, 0.5)",
+        "borderColor": "#4b5563",
+        "borderWidth": 1,
+        "borderRadius": 6,
+        "color": "#ffffff"
+      },
+      "isLocked": false
+    },
+    {
+      "id": "Button-1760551458754-ysbrmr7",
+      "name": "StartRoute_Button",
+      "type": "Button",
+      "position": {
+        "x": 20,
+        "y": 498
+      },
+      "size": {
+        "width": 482,
+        "height": 40
+      },
+      "description": "설정된 목적지, 반경 및 이동 수단 옵션에 따라 길찾기를 시작하는 메인 액션 버튼입니다. 클릭 시 경로 계산을 시작하고 다음 화면으로 전환됩니다.",
+      "props": {
+        "text": "지쿠터 포함 길찾기 시작",
+        "kind": "text",
+        "icon": null
+      },
+      "styles": {
+        "backgroundColor": "#2563eb",
+        "borderColor": "#6b7280",
+        "borderWidth": 0,
+        "borderRadius": 6,
+        "color": "#ffffff",
+        "fontSize": 14,
+        "fontWeight": 600
+      },
+      "isLocked": false
+    }
+  ]
+}
